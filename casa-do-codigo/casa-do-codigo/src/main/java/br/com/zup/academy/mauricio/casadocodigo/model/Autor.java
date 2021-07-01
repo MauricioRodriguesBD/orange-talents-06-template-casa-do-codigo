@@ -13,6 +13,8 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 import com.sun.istack.NotNull;
+
+import br.com.zup.academy.mauricio.casadocodigo.validation.EmailUnico;
 @Entity
 @Table(name = "Autor")
 public class Autor {
@@ -23,6 +25,7 @@ public class Autor {
 	
 	@NotBlank	
 	@Email
+	@EmailUnico
 	private String email;
 	
 	@NotBlank
