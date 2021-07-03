@@ -1,14 +1,27 @@
 package br.com.zup.academy.mauricio.casadocodigo.request;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+
+import br.com.zup.academy.mauricio.casadocodigo.model.Autor;
+import br.com.zup.academy.mauricio.casadocodigo.model.Categoria;
+import br.com.zup.academy.mauricio.casadocodigo.validation.UniqueValue;
+
 public class NovoAutorRequest {
 
 	private String nome;
-
+	
+	@NotBlank
+	@Email
+	@UniqueValue(domainClass = Autor.class,fieldName = "email" )
 	private String email;
-
+	
+	@NotBlank
 	private String descricao;
 
-	public NovoAutorRequest(String nome, String email, String descricao) {
+
+
+	public NovoAutorRequest(String nome, @NotBlank @Email String email, @NotBlank String descricao) {
 		super();
 		this.nome = nome;
 		this.email = email;
@@ -37,5 +50,10 @@ public class NovoAutorRequest {
 
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
+	}
+
+	public Autor toModel() {
+		 
+		return new Autor(this.nome, this.email, this.descricao);
 	}
 }

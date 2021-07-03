@@ -2,6 +2,8 @@ package br.com.zup.academy.mauricio.casadocodigo.controller;
 
 import java.util.Optional;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 
@@ -27,6 +29,7 @@ import br.com.zup.academy.mauricio.casadocodigo.request.NovoAutorRequest;
 public class AutorController {
 
 	
+	
 	@Autowired
 	private AutorRepository repository;
 	
@@ -46,10 +49,10 @@ public class AutorController {
 	
 	@PostMapping("/criar")
 	@Transactional
-	public ResponseEntity<?> criar(@Valid @RequestBody NovoAutorRequest request){
+	public ResponseEntity<?> criar(@RequestBody @Valid NovoAutorRequest request){
 		
-		Autor autor = new Autor(request.getNome(), request.getEmail(), request.getDescricao());
-		
+//		Autor autor = new Autor(request.getNome(), request.getEmail(), request.getDescricao());
+		Autor autor = request.toModel();
 		repository.save(autor);
 		
 		return ResponseEntity.ok(autor);

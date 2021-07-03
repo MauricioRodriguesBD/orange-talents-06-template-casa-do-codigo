@@ -27,7 +27,7 @@ public class CategoriaController {
 		this.repository = repository;
 	}
 
-	@PostMapping("/criarcategoria")
+	@PostMapping("/criar")
 	@Transactional
 	public ResponseEntity<?> criar(@Valid @RequestBody NovaCategoriaRequest request) {
 		Categoria categoria = new Categoria(request.getNome());
