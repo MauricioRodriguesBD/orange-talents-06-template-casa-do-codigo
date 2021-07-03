@@ -14,7 +14,8 @@ import javax.validation.constraints.Size;
 
 import com.sun.istack.NotNull;
 
-import br.com.zup.academy.mauricio.casadocodigo.validation.EmailUnico;
+import br.com.zup.academy.mauricio.casadocodigo.validation.UniqueValue;
+
 @Entity
 @Table(name = "Autor")
 public class Autor {
@@ -22,21 +23,26 @@ public class Autor {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
-	@NotBlank	
+
+	@NotBlank
 	@Email
-	@EmailUnico
-	private String email;
 	
+	private String email;
+
 	@NotBlank
 	private String nome;
-	
-	public String getEmail() {
-		return email;
-	}
 
-	public void setEmail(String email) {
+	@NotBlank
+	@Size(max = 400)
+	private String descricao;
+
+	private LocalDateTime dataDateTime = LocalDateTime.now();
+
+	public Autor(@Email String nome, String email, String descricao) {
+		super();
 		this.email = email;
+		this.nome = nome;
+		this.descricao = descricao;
 	}
 
 	public String getNome() {
@@ -47,6 +53,14 @@ public class Autor {
 		this.nome = nome;
 	}
 
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
 	public String getDescricao() {
 		return descricao;
 	}
@@ -55,18 +69,4 @@ public class Autor {
 		this.descricao = descricao;
 	}
 
-	@NotBlank
-	@Size(max = 400)
-	private String descricao;
-	
-	private LocalDateTime dataDateTime = LocalDateTime.now();
-
-	public Autor(@Email String email, String nome, String descricao) {
-		super();
-		this.email = email;
-		this.nome = nome;
-		this.descricao = descricao;
-	}
 }
-
-

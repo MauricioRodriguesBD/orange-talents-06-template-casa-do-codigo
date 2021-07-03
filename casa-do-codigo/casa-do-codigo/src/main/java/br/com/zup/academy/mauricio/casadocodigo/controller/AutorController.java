@@ -15,17 +15,25 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.zup.academy.mauricio.casadocodigo.dto.AutorDto;
+
+
 import br.com.zup.academy.mauricio.casadocodigo.model.Autor;
 import br.com.zup.academy.mauricio.casadocodigo.repository.AutorRepository;
+import br.com.zup.academy.mauricio.casadocodigo.request.NovoAutorRequest;
+
 
 @RestController
-@RequestMapping("/teste")
+@RequestMapping("/autor")
 public class AutorController {
 
 	
 	@Autowired
 	private AutorRepository repository;
+	
+	public AutorController(AutorRepository repository) {
+		super();
+		this.repository = repository;
+	}
 	
 	@GetMapping("/{id}")
 	public ResponseEntity<Autor> getById(@PathVariable Integer id){
@@ -36,12 +44,14 @@ public class AutorController {
 		return ResponseEntity.notFound().build();
 	}
 	
-	@PostMapping("/postar")
+	@PostMapping("/criar")
 	@Transactional
-	public ResponseEntity<Autor> post(@Valid @RequestBody Autor autor){
-		Autor a = new Autor(autor.getEmail(),autor.getNome(),autor.getDescricao());
-	
-		return ResponseEntity.status(HttpStatus.CREATED).body(repository.save(a));
+	public ResponseEntity<?> criar(@Valid @RequestBody NovoAutorRequest request){
 		
+		Autor autor = new Autor(request.getNome(), request.getEmail(), request.getDescricao());
+		
+		repository.save(autor);
+		
+		return ResponseEntity.ok(autor);
 	}
 }

@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import br.com.zup.academy.mauricio.casadocodigo.model.Autor;
 import br.com.zup.academy.mauricio.casadocodigo.repository.AutorRepository;
 
-public class EmailValidation implements ConstraintValidator<EmailUnico, String>{
+public class UniqueValueValidator implements ConstraintValidator<UniqueValue, String>{
 	
 	@Autowired
 	private AutorRepository repository;
@@ -28,7 +28,7 @@ public class EmailValidation implements ConstraintValidator<EmailUnico, String>{
 	}
 	
 	@Override
-	public void initialize(EmailUnico constraintEmailNaoNulo) {
+	public void initialize(UniqueValue constraintEmailNaoNulo) {
 		ConstraintValidator.super.initialize(constraintEmailNaoNulo);
 	}
 
