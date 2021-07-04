@@ -35,6 +35,9 @@ public class Autor {
 	@NotBlank
 	@Size(max = 400)
 	private String descricao;
+	
+	@Deprecated
+	private Autor() {}
 
 	private LocalDateTime dataDateTime = LocalDateTime.now();
 
@@ -60,6 +63,8 @@ public class Autor {
 	public String getDescricao() {
 		return descricao;
 	}
+	
+	
 
 
 

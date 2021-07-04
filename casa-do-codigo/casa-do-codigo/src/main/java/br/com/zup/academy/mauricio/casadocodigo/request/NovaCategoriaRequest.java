@@ -4,7 +4,6 @@ import javax.validation.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 
-import br.com.zup.academy.mauricio.casadocodigo.model.Autor;
 import br.com.zup.academy.mauricio.casadocodigo.model.Categoria;
 import br.com.zup.academy.mauricio.casadocodigo.validation.UniqueValue;
 

@@ -1,7 +1,5 @@
 package br.com.zup.academy.mauricio.casadocodigo.model;
 
-import java.time.LocalDate;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,11 +11,14 @@ public class Categoria {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	private Integer id;
 	
 	private  String nome;
 	
-	private LocalDate data = LocalDate.now();
+	@Deprecated
+	private Categoria() {};
+	
+
 
 	public Categoria(String nome) {
 		super();
