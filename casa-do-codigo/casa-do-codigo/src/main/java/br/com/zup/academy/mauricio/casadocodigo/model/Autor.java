@@ -63,6 +63,11 @@ public class Autor {
 	public String getDescricao() {
 		return descricao;
 	}
+
+	public Integer getId() {
+		return id;
+	}
+	
 	
 	
 
