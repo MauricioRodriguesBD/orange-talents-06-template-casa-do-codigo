@@ -1,6 +1,7 @@
 package br.com.zup.academy.mauricio.casadocodigo.controller;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import javax.persistence.EntityManager;
@@ -10,11 +11,13 @@ import javax.validation.Valid;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.zup.academy.mauricio.casadocodigo.dto.DetalheLivroResponse;
 import br.com.zup.academy.mauricio.casadocodigo.model.Livro;
 import br.com.zup.academy.mauricio.casadocodigo.repository.LivroRepository;
 import br.com.zup.academy.mauricio.casadocodigo.request.NovoLivroRequest;
@@ -40,6 +43,19 @@ public class LivroController {
         		.map(LivroResponse::new)
         		.collect(Collectors.toList()));
 	}
+	
+	@GetMapping("/produtos/{id}")
+	public ResponseEntity<DetalheLivroResponse> response(@PathVariable Long id){
+		Optional<Livro> livro = repository.findById(id);
+		if(livro.isPresent()) {
+			DetalheLivroResponse response = new DetalheLivroResponse(livro.get());
+			return ResponseEntity.ok(response);
+			
+		}
+		return ResponseEntity.notFound().build();
+	}
+	
+
 
 	@PostMapping("/criar")
 	@Transactional
